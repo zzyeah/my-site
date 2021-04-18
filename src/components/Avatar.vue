@@ -19,6 +19,7 @@ export default {
     },
     size: {
       type: Number,
+      default: 150, // 默认值
     },
   },
 };
