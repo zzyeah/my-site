@@ -1,0 +1,38 @@
+<template>
+  <img
+    :src="url"
+    alt="头像"
+    class="avatar-img"
+    :style="{
+      width: size + 'px',
+      height: size + 'px',
+    }"
+  />
+</template>
+
+<script>
+export default {
+  props: {
+    url: {
+      type: String, // url属性必须是一个字符串
+      required: true, // 属性必传
+    },
+    size: {
+      type: Number,
+    },
+  },
+};
+</script>
+
+<style lang="less" scoped>
+/**
+  * scoped
+  * 带有作用域的样式
+*/
+.avatar-img {
+  border-radius: 50%;
+  object-fit: cover; // 避免图片过度拉伸
+  display: block;
+}
+
+</style>
