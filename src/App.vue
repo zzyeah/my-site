@@ -1,22 +1,29 @@
 <template>
   <div>
     <h1>App组件</h1>
-    <Avatar
-      url="http://mdrs.yuanjin.tech/FgMwAPYq17So9nwVH44ltDHo7u3c"
+    <icon 
+    type="home"
     />
-    <Avatar
-      url="https://qiheizhiya.oss-cn-shenzhen.aliyuncs.com/image/avatar8.jpg"
-      :size="50"
+    <icon 
+    type="arrowDown"
     />
   </div>
 </template>
 
 <script>
-import Avatar from "./components/Avatar";
+import Icon from "./components/Icon.vue";
 export default {
   name: "App", // 如果组件没有在注册的时候指定名字，则使用该名字
   components: {
-    Avatar,
+    Icon,
   },
 };
 </script>
+
+<style scoped>
+/* 父组件对子组件的根元素进行样式影响 */
+.iconfont {
+  font-size: 26px;
+  color: red;
+}
+</style>
