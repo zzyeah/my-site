@@ -1,5 +1,5 @@
 <template>
-  <i class="iconfont" :class="fontClass"></i>
+  <i class="iconfont iconfont-container" :class="fontClass"></i>
 </template>
 
 <script>

@@ -1,21 +1,33 @@
 <template>
   <div>
     <h1>App组件</h1>
-    <icon 
-    type="home"
-    />
-    <icon 
-    type="arrowDown"
+    <pager
+      :current="current"
+      :total="total"
+      @pageChange="handlePageChange($event)"
     />
   </div>
 </template>
 
 <script>
-import Icon from "./components/Icon.vue";
+import Pager from "./components/Pager.vue";
 export default {
   name: "App", // 如果组件没有在注册的时候指定名字，则使用该名字
   components: {
-    Icon,
+    Pager,
+  },
+  data() {
+    return {
+      current: 1,
+      total: 302,
+    };
+  },
+  methods: {
+    // 页码变化
+    handlePageChange(newPage) {
+      this.current = newPage;
+      console.log('加载页数据');
+    },
   },
 };
 </script>

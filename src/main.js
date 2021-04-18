@@ -1,7 +1,8 @@
 // 入口文件
-import Vue from 'vue'
+import Vue from 'vue';
 // 根组件
-import App from './App.vue'
+import App from './App.vue';
+import './styles/global.less';
 
 new Vue({
   // 渲染组件

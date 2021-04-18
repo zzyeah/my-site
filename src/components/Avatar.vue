@@ -2,7 +2,7 @@
   <img
     :src="url"
     alt="头像"
-    class="avatar-img"
+    class="avatar-container"
     :style="{
       width: size + 'px',
       height: size + 'px',
