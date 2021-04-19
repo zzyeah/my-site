@@ -30,7 +30,7 @@ export default {
   * scoped
   * 带有作用域的样式
 */
-.avatar-img {
+.avatar-container {
   border-radius: 50%;
   object-fit: cover; // 避免图片过度拉伸
   display: block;
