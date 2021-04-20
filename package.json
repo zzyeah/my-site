@@ -12,7 +12,8 @@
     "test:Image": "vue serve ./src/components/ImageLoader/test.vue",
     "test:Contact": "vue serve ./src/components/SiteAside/Contact/test.vue",
     "test:Menu": "vue serve ./src/components/SiteAside/Menu/test.vue",
-    "test:Site": "vue serve ./src/components/SiteAside/test.vue"
+    "test:Site": "vue serve ./src/components/SiteAside/test.vue",
+    "test:Layout": "vue serve ./src/components/Layout/test.vue"
   },
   "dependencies": {
     "core-js": "^3.6.5",

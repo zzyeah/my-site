@@ -1,16 +1,37 @@
 <template>
-  <div>
-    <h1>App组件</h1>
+  <div class="app-container">
+    <layout>
+      <template #left>
+        <div class="aside">
+          <site-aside />
+        </div>
+      </template>
+      <template #default>
+        中间珠区域
+      </template>
+    </layout>
   </div>
 </template>
 
 <script>
+import Layout from "./components/Layout/Layout.vue";
+import SiteAside from "./components/SiteAside/SiteAside.vue";
 export default {
   name: "App", // 如果组件没有在注册的时候指定名字，则使用该名字
   components: {
+    SiteAside,
+    Layout,
   },
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+@import "./styles/mixin.less";
+.app-container {
+  .self-fill(fixed);
+}
+.aside {
+  width: 250px;
+  height: 100%;
+}
 </style>
