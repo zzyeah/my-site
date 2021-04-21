@@ -1,8 +1,11 @@
 // 入口文件
 import Vue from 'vue';
+
 // 根组件
 import App from './App.vue';
 import './styles/global.less';
+import router from './router';
+
 
 new Vue({
   // 渲染组件
@@ -17,4 +20,5 @@ new Vue({
    * 2. 打包结果中不再需要vue的编译代码，减少了打包体积
    */
   render: h => h(App),
+  router,
 }).$mount('#app')

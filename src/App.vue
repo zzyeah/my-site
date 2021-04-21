@@ -7,7 +7,8 @@
         </div>
       </template>
       <template #default>
-        中间珠区域
+        <router-view></router-view>
+        <!-- hhhhh -->
       </template>
     </layout>
   </div>
