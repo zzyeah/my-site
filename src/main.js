@@ -1,4 +1,5 @@
 // 入口文件
+import './mock';
 import Vue from 'vue';
 
 // 根组件
@@ -6,6 +7,7 @@ import App from './App.vue';
 import './styles/global.less';
 import router from './router';
 import showMessage from './utils/showMessage';
+import './api/banner';
 Vue.prototype.$showMessage = showMessage;
 // window.showMessage = showMessage;
 // showMessage('sadhoaisda');
