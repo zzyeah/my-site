@@ -4,4 +4,5 @@ export async function getBanner(){
     return await request.get('/api/banner');
 }
 
-getBanner().then(r=>{console.log(r);});
+getBanner();
+// getBanner().then(r=>{console.log(r);});
