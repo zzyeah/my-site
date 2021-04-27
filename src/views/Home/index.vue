@@ -1,7 +1,7 @@
 <template>
   <div class="home-container">
     <ul>
-      <li v-for="item in banners" key="item.id">
+      <li v-for="item in banners" :key="item.id">
         <img :src="item.midImg" alt="" />
       </li>
     </ul>
