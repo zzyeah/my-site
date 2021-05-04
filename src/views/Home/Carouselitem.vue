@@ -69,7 +69,7 @@ export default {
         width: this.$refs.image.clientWidth,
         height: this.$refs.image.clientHeight,
       };
-      console.log(this.innerSize);
+      // console.log(this.innerSize);
     },
     handleMouseMove(e) {
       const rect = this.$refs.container.getBoundingClientRect();

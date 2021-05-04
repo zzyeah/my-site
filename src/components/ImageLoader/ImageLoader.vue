@@ -45,7 +45,7 @@ export default {
   methods: {
     handleLoad() {
       this.originLoaded = true;
-      console.log("加载好了");
+      // console.log("加载好了");
       setTimeout(() => {
         this.allDone = true;
         this.$emit("load", this.allDone);
