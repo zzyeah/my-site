@@ -1,11 +1,16 @@
 <template>
-  <div class="home-container" ref="container" @wheel="handleWheel">
+  <div
+    v-loading="isLoading"
+    class="home-container"
+    ref="container"
+    @wheel="handleWheel"
+  >
     <ul
       class="carousel-container"
       :style="{ marginTop }"
       @transitionend="handleTransitionEnd"
     >
-      <li v-for="item in banners" :key="item.id">
+      <li v-for="item in data" :key="item.id">
         <carouselitem :carousel="item" />
       </li>
     </ul>
@@ -13,7 +18,7 @@
       <icon type="arrowUp" />
     </div>
     <div
-      v-show="index < banners.length - 1"
+      v-show="index < data.length - 1"
       @click="switchTo(index + 1)"
       class="icon icon-down"
     >
@@ -24,11 +29,12 @@
         :class="{
           active: i === index,
         }"
-        v-for="(item, i) in banners"
+        v-for="(item, i) in data"
         :key="item.id"
         @click="switchTo(i)"
       ></li>
     </ul>
+    <!-- <loading v-if="isLoading" /> -->
   </div>
 </template>
 
@@ -36,21 +42,20 @@
 import { getBanner } from "@/api/banner";
 import Carouselitem from "./Carouselitem.vue";
 import Icon from "../../components/Icon/Icon.vue";
+import fetchData from "@/mixins/fetchData.js";
+
 export default {
+  mixins: [fetchData([])],
   components: {
     Carouselitem,
     Icon,
   },
   data() {
     return {
-      banners: [],
       index: 0, // 当前显示的是第几张轮播图
       containerHeight: 0, // 整个容器的高度
       switching: false, // 是否正在翻页中
     };
-  },
-  async created() {
-    this.banners = await getBanner();
   },
   mounted() {
     this.containerHeight = this.$refs.container.clientHeight;
@@ -76,7 +81,7 @@ export default {
         // 往上滚动
         this.switching = true;
         this.index--;
-      } else if (e.deltaY > 5 && this.index < this.banners.length - 1) {
+      } else if (e.deltaY > 5 && this.index < this.data.length - 1) {
         // 往下滚动
         this.switching = true;
         this.index++;
@@ -86,8 +91,11 @@ export default {
       this.switching = false;
     },
     handleResize() {
-      console.log('change');
+      console.log("change");
       this.containerHeight = this.$refs.container.clientHeight;
+    },
+    async fetchData() {
+      return await getBanner();
     },
   },
 };

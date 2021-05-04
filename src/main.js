@@ -9,21 +9,12 @@ import router from './router';
 import showMessage from './utils/showMessage';
 import './api/banner';
 Vue.prototype.$showMessage = showMessage;
-// window.showMessage = showMessage;
-// showMessage('sadhoaisda');
+
+// 注册全局指令
+import vLoading from './directives/loading';
+Vue.directive('loading', vLoading);
 
 new Vue({
-  // 渲染组件
-  /**
-   * 预编译
-   * 源代码 -> 打包 -> 运行
-   * SFC->打包成render函数(虚拟节点)
-   * SFC单页面模块 类似单组件
-   * 
-   * 好处：
-   * 1. 运行时不再需要编译模板了，提高了运行效率
-   * 2. 打包结果中不再需要vue的编译代码，减少了打包体积
-   */
   render: h => h(App),
   router,
 }).$mount('#app')
