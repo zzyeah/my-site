@@ -22,7 +22,7 @@ new Vue({
 
 
 // test
-import * as blogApi from './api/blog';
+// import * as blogApi from './api/blog';
 
-blogApi.getBlogTypes().then(r => console.log('type', r));
-blogApi.getBlogs(2, 20, 3).then(r => console.log('blog', r));
+// blogApi.getBlogTypes().then(r => console.log('type', r));
+// blogApi.getBlogs(2, 20, 3).then(r => console.log('blog', r));

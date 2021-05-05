@@ -9,5 +9,6 @@ export default [
     { name: "About", path: '/about', component: About },
     { name: "Project", path: '/project', component: Project },
     { name: "Blog", path: '/blog', component: Blog },
+    { name: "CategoryBlog", path: '/blog/cate/:categoryId', component: Blog },
     { name: "Message", path: '/message', component: Message },
 ]

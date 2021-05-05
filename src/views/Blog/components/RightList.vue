@@ -4,6 +4,13 @@
       <span @click="handleClick(item)" :class="{ active: item.isSelect }">
         {{ item.name }}
       </span>
+      <span
+        v-if="item.aside"
+        class="aside"
+        @click="handleClick(item)"
+        :class="{ active: item.isSelect }"
+        >{{ item.aside }}</span
+      >
       <right-list :list="item.children" @select="handleClick" />
     </li>
   </ul>
@@ -21,7 +28,10 @@ export default {
   },
   methods: {
     handleClick(item) {
-        this.$emit('select', item)
+      if (!item.isSelect) {
+        this.$emit("select", item);
+      }
+      return;
     },
   },
 };
@@ -39,10 +49,16 @@ export default {
   li {
     min-height: 40px;
     line-height: 40px;
+    font-size: 14px;
     .active {
       color: @warn;
       font-size: bold;
     }
   }
+}
+.aside {
+  font-size: 12px;
+  margin-left: 1em;
+  color: @gray;
 }
 </style>

@@ -8,7 +8,7 @@ Mock.mock('/api/blogtype', 'get', {
         {
             'id|+1': 1,
             name: '分类@id',
-            "acticleCount|0-300": 0,
+            "articleCount|0-300": 0,
             'order|+1': 1,
         }
     ]
@@ -16,7 +16,7 @@ Mock.mock('/api/blogtype', 'get', {
 
 Mock.mock(/^\/api\/blog(\?.+)?$/, 'get', function (options) {
     const query = qs.parse(options.url);
-    console.log(query);
+    // console.log(query);
     return Mock.mock({
         code: 0,
         msg: '',
@@ -24,7 +24,7 @@ Mock.mock(/^\/api\/blog(\?.+)?$/, 'get', function (options) {
             "total|2000-3000": 0,
             [`rows|${query.limit || 10}`]: [{
                 id: "@guid",
-                title: "@ctitle",
+                title: "@ctitle(1,50)",
                 description: "描述@cparagraph(1,10)",
                 category: {
                     'id|1-10': 0,
@@ -32,7 +32,7 @@ Mock.mock(/^\/api\/blog(\?.+)?$/, 'get', function (options) {
                 },
                 'scanNumber|0-3000': 0,
                 'commentNumber|0-300': 0,
-                thumb: Mock.Random.image('300x250', "#000", "#fff", "Random Image"),
+                'thumb|1': [Mock.Random.image('300x250', "#000", "#fff", "Random Image"), null],
                 createDate: `@date('T')`
             }],
         },
