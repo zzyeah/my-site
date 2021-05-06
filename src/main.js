@@ -22,7 +22,16 @@ new Vue({
 
 
 // test
-// import * as blogApi from './api/blog';
+import * as blogApi from './api/blog';
 
 // blogApi.getBlogTypes().then(r => console.log('type', r));
 // blogApi.getBlogs(2, 20, 3).then(r => console.log('blog', r));
+
+// blogApi.getBlog('asdasd').then(r => console.log(r))
+// blogApi.postComment({
+//   nickname: '11',
+//   content: 'content',
+//   blogId: '123'
+// }).then(r=>console.log(r))
+
+blogApi.getComments('123213').then(r => console.log(r))
