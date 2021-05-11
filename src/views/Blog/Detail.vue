@@ -1,13 +1,51 @@
 <template>
-  <h1>文章详情</h1>
+  <layout >
+    <div class="main-container" v-loading='isLoading'>
+      <blog-detail :blog="data" v-if="data"/>
+    </div>
+    <template #right>
+      <div class="right-container" v-loading="isLoading">
+        <BlogTOC :toc="data.toc" v-if="data"/>
+      </div>
+    </template>
+  </layout>
 </template>
 
 <script>
-export default {
+import fetchData from '@/mixins/fetchData';
+import { getBlog } from '@/api/blog';
+import Layout from '@/components/Layout/Layout.vue';
+import BlogTOC from './components/BlogTOC.vue';
+import BlogDetail from './components/BlogDetail.vue';
 
+export default {
+  components: { Layout, BlogTOC, BlogDetail },
+  mixins: [fetchData(null)],
+  methods: {
+    async fetchData(){
+      return await getBlog(this.$route.params.id);
+    }
+  }
 }
 </script>
 
-<style>
-
+<style lang="less" scoped>
+.main-container{
+  overflow-y: scroll;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+.right-container{
+  width: 300px;
+  height: 100%;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  position: relative;
+  padding: 20px;
+}
 </style>
