@@ -1,38 +1,55 @@
 <template>
-  <layout >
-    <div class="main-container" v-loading='isLoading'>
-      <blog-detail :blog="data" v-if="data"/>
+  <layout>
+    <div ref="mainContainer" class="main-container" v-loading="isLoading">
+      <blog-detail :blog="data" v-if="data" />
       <blog-comment v-if="!isLoading" />
     </div>
     <template #right>
       <div class="right-container" v-loading="isLoading">
-        <BlogTOC :toc="data.toc" v-if="data"/>
+        <BlogTOC :toc="data.toc" v-if="data" />
       </div>
     </template>
   </layout>
 </template>
 
 <script>
-import fetchData from '@/mixins/fetchData';
-import { getBlog } from '@/api/blog';
-import Layout from '@/components/Layout/Layout.vue';
-import BlogTOC from './components/BlogTOC.vue';
-import BlogDetail from './components/BlogDetail.vue';
-import BlogComment from './components/BlogComment.vue';
+import fetchData from "@/mixins/fetchData";
+import { getBlog } from "@/api/blog";
+import Layout from "@/components/Layout/Layout.vue";
+import BlogTOC from "./components/BlogTOC.vue";
+import BlogDetail from "./components/BlogDetail.vue";
+import BlogComment from "./components/BlogComment.vue";
 
 export default {
   components: { Layout, BlogTOC, BlogDetail, BlogComment },
   mixins: [fetchData(null)],
   methods: {
-    async fetchData(){
+    async fetchData() {
       return await getBlog(this.$route.params.id);
-    }
-  }
-}
+    },
+    handleScroll() {
+      this.$bus.$emit("mainScroll", this.$refs.mainContainer);
+    },
+  },
+  mounted() {
+    this.$refs.mainContainer.addEventListener("scroll", this.handleScroll);
+  },
+  beforeDestroy() {
+    console.log(this.$refs.mainContainer);
+    this.$refs.mainContainer.removeEventListener("scroll", this.handleScroll);
+  },
+  updated() {
+    const hash = location.hash;
+    location.hash = "";
+    setTimeout(() => {
+      location.hash = hash;
+    }, 50);
+  },
+};
 </script>
 
 <style lang="less" scoped>
-.main-container{
+.main-container {
   overflow-y: scroll;
   height: 100%;
   box-sizing: border-box;
@@ -42,7 +59,7 @@ export default {
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
-.right-container{
+.right-container {
   width: 300px;
   height: 100%;
   overflow-y: scroll;

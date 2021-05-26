@@ -36,4 +36,12 @@
 
 import Vue from 'vue';
 
-export default new Vue({});
+/**
+ * 事件名：mainScroll
+ * 含义：著区域滚动条位置变化后触发
+ * 参数：
+ * - 滚动的dom元素
+ */
+
+// export default new Vue({});
+Vue.prototype.$bus = new Vue({});
