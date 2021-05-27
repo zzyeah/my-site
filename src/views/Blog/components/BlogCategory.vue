@@ -24,7 +24,7 @@ export default {
         (a, b) => a + b.articleCount,
         0
       );
-      console.log(this.data);
+      // console.log(this.data);
       const result = [
         { name: "全部", id: -1, articleCount: totalArticleCount },
         ...this.data,

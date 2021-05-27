@@ -7,8 +7,8 @@ import request from './request';
  * @param {*} categoryid 
  */
 export async function getBlogs(page = 1, limit = 10, categoryid = -1) {
-    console.log(page, limit, categoryid);
-    console.log('执行获取博客');
+    // console.log(page, limit, categoryid);
+    // console.log('执行获取博客');
     return await request.get('/api/blog', {
         params: {
             page,

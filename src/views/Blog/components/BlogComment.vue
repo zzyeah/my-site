@@ -34,7 +34,6 @@ export default {
       const range = 100; // 定义一个可接受的范围,在这个范围内都算到达底部
       const dec = Math.abs(dom.scrollTop + dom.clientHeight - dom.scrollHeight);
       if (dec <= range) {
-        console.log("加载更多");
         this.fetchMore();
       }
     },

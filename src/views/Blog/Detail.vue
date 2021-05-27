@@ -19,29 +19,15 @@ import Layout from "@/components/Layout/Layout.vue";
 import BlogTOC from "./components/BlogTOC.vue";
 import BlogDetail from "./components/BlogDetail.vue";
 import BlogComment from "./components/BlogComment.vue";
+import mainScroll from "@/mixins/mainScroll.js";
 
 export default {
   components: { Layout, BlogTOC, BlogDetail, BlogComment },
-  mixins: [fetchData(null)],
+  mixins: [fetchData(null), mainScroll("mainContainer")],
   methods: {
     async fetchData() {
       return await getBlog(this.$route.params.id);
     },
-    handleScroll() {
-      this.$bus.$emit("mainScroll", this.$refs.mainContainer);
-    },
-    handleSetMainScroll(scrollTop) {
-      this.$refs.mainContainer.scrollTop = scrollTop;
-    },
-  },
-  mounted() {
-    this.$bus.$on("setMainScroll", this.handleSetMainScroll);
-    this.$refs.mainContainer.addEventListener("scroll", this.handleScroll);
-  },
-  beforeDestroy() {
-    this.$bus.$emit("mainScroll");
-    this.$refs.mainContainer.removeEventListener("scroll", this.handleScroll);
-    this.$bus.$off("setMainScroll", this.handleSetMainScroll);
   },
   updated() {
     const hash = location.hash;
