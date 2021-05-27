@@ -52,7 +52,7 @@ export default {
     this.setSelectDebounce = debounce(this.setSelect, 50);
     this.$bus.$on("mainScroll", this.setSelectDebounce);
   },
-  destroyed(){
+  destroyed() {
     this.$bus.$off("mainScroll", this.setSelectDebounce);
   },
   methods: {
@@ -60,7 +60,10 @@ export default {
       location.hash = item.anchor;
     },
     // 设置activeAnchor为正确的值
-    setSelect() {
+    setSelect(scrollDom) {
+      if (!scrollDom) {
+        return;
+      }
       this.activeAnchor = ""; // 由于后续要重新设置，先清空之前的状态
       const range = 100;
       for (const dom of this.doms) {

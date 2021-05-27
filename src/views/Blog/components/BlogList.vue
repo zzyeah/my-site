@@ -1,5 +1,5 @@
 <template>
-  <div class="blog-list-container" v-loading="isLoading" ref="container">
+  <div class="blog-list-container" v-loading="isLoading" ref="mainContainer">
     <ul>
       <li v-for="item in data.rows" :key="item.id">
         <div class="thumb" v-if="item.thumb">
@@ -65,6 +65,10 @@ import { formatDate } from "@/utils";
 export default {
   mixins: [fetchData({})],
   components: { Pager },
+  mounted() {
+    this.$bus.$on("setMainScroll", this.handleSetMainScroll);
+    this.$refs.mainContainer.addEventListener("scroll", this.handleScroll);
+  },
   computed: {
     // 获取路由信息
     routeInfo() {
@@ -76,6 +80,11 @@ export default {
         limit: +limit,
       };
     },
+  },
+  beforeDestroy() {
+    this.$bus.$emit("mainScroll");
+    this.$refs.mainContainer.removeEventListener("scroll", this.handleScroll);
+    this.$bus.$off("setMainScroll", this.handleSetMainScroll);
   },
   methods: {
     formatDate,
@@ -106,6 +115,12 @@ export default {
           },
         });
       }
+    },
+    handleScroll() {
+      this.$bus.$emit("mainScroll", this.$refs.mainContainer);
+    },
+    handleSetMainScroll(scrollTop) {
+      this.$refs.mainContainer.scrollTop = scrollTop;
     },
   },
   watch: {
