@@ -20,13 +20,16 @@ import BlogTOC from "./components/BlogTOC.vue";
 import BlogDetail from "./components/BlogDetail.vue";
 import BlogComment from "./components/BlogComment.vue";
 import mainScroll from "@/mixins/mainScroll.js";
+import { titleController } from "@/utils";
 
 export default {
   components: { Layout, BlogTOC, BlogDetail, BlogComment },
   mixins: [fetchData(null), mainScroll("mainContainer")],
   methods: {
     async fetchData() {
-      return await getBlog(this.$route.params.id);
+      const resp = await getBlog(this.$route.params.id);
+      titleController.setRouteTitle(resp.title);
+      return resp;
     },
   },
   updated() {
