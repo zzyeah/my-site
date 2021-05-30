@@ -16,6 +16,7 @@ export default {
     url: {
       type: String, // url属性必须是一个字符串
       required: true, // 属性必传
+      default: "http://mdrs.yuanjin.tech/FgMwAPYq17So9nwVH44ltDHo7u3c",
     },
     size: {
       type: Number,
@@ -35,5 +36,4 @@ export default {
   object-fit: cover; // 避免图片过度拉伸
   display: block;
 }
-
 </style>

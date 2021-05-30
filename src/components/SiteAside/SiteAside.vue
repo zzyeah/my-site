@@ -1,21 +1,24 @@
 <template>
   <div class="site-aside-container">
-    <avatar :url="'http://mdrs.yuanjin.tech/FgMwAPYq17So9nwVH44ltDHo7u3c'" />
-    <h1 class="title">好家伙啊兄弟</h1>
+    <template v-if="data">
+      <avatar :url="data && data.avatar" />
+      <h1 class="title">{{ data.siteTitle }}</h1>
+    </template>
     <Menu />
-    <contact />
-    <p class="footer">
-      黑ICP备17001719号
-    </p>
+    <contact v-if="data" />
+    <p class="footer" v-if="data">{{ data.icp }}</p>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import Avatar from "../Avatar/Avatar.vue";
 import Contact from "./Contact/Contact.vue";
 import Menu from "./Menu/Menu.vue";
+
 export default {
   components: { Avatar, Menu, Contact },
+  computed: mapState("setting", ["data"]),
 };
 </script>
 
@@ -33,7 +36,7 @@ export default {
 .avatar-container {
   margin: 0 auto;
 }
-.footer{
+.footer {
   text-align: center;
   font-size: 12px;
 }

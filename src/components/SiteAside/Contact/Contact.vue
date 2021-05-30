@@ -1,19 +1,19 @@
 <template>
   <ul class="contact-container">
-    <li v-for="c in content" :key="c.id">
+    <li v-for="c in contents" :key="c.id">
       <a :href="c.href">
-        <div class="icon" :class="{
-          weixin: c.type === 'weixin' 
-        }">
+        <div
+          class="icon"
+          :class="{
+            weixin: c.type === 'weixin',
+          }"
+        >
           <icon :type="c.type" />
         </div>
-        <span>{{c.name}}</span>
+        <span>{{ c.name }}</span>
       </a>
       <div class="pop" v-if="c.src">
-        <img
-          :src="c.src"
-          alt=""
-        />
+        <img :src="c.src" alt="" />
       </div>
     </li>
   </ul>
@@ -22,43 +22,53 @@
 <script>
 import "@/styles/global.less";
 import Icon from "@/components/Icon/Icon.vue";
+import { mapState } from "vuex";
 export default {
   components: {
     Icon,
   },
-  data() {
-    return {
-      content: [
-        {
-          type: "github",
-          name: "zzyeah",
-          id: 5417,
-          href: "https://github.com/zzyeah/",
-        },
-        {
-          type: "mail",
-          name: "541767316@qq.com",
-          id: 7595,
-          href: "mailto:541767316@qq.com",
-        },
-        {
-          type: "qq",
-          name: "541767316",
-          id: "316",
-          href:
-            "tencent://message/?Menu=yes&uin=541767316&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45",
-          src:
-            "http://www.duyiedu.com/source/img/%E5%85%AC%E4%BC%97%E5%8F%B7%E4%BA%8C%E7%BB%B4%E7%A0%81.png",
-        },
-        {
-          type: "weixin",
-          name: "我也不知道",
-          id: 558,
-          src:
-            "http://www.duyiedu.com/source/img/%E5%85%AC%E4%BC%97%E5%8F%B7%E4%BA%8C%E7%BB%B4%E7%A0%81.png",
-        },
-      ],
-    };
+  computed: {
+    ...mapState("setting", ["data"]),
+    contents() {
+      const resp = this.data;
+      let list = [];
+      let count = 0;
+      for (let data in resp) {
+        let temp = {};
+        temp.type = data;
+        temp.name = resp[data];
+        temp.id = Math.floor((Math.random() + 1) * 10000000);
+        if (temp.type === "github") {
+          temp.name = "zzyeah";
+          temp.href = "https://github.com/zzyeah/";
+        }
+        if (temp.type === "mail") {
+          temp.name = "541767316@qq.com";
+          temp.href = "mailto:541767316@qq.com";
+        }
+        if (temp.type === "qq") {
+          temp.name = "541767316";
+          temp.href =
+            "tencent://message/?Menu=yes&uin=541767316&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45";
+          temp.src =
+            "http://www.duyiedu.com/source/img/%E5%85%AC%E4%BC%97%E5%8F%B7%E4%BA%8C%E7%BB%B4%E7%A0%81.png";
+        }
+        if (temp.type === "weixin") {
+          temp.src =
+            "http://www.duyiedu.com/source/img/%E5%85%AC%E4%BC%97%E5%8F%B7%E4%BA%8C%E7%BB%B4%E7%A0%81.png";
+          temp.name = "541767316";
+        }
+        count = 0;
+        for (const i in temp) {
+          if (temp.hasOwnProperty(i)) {
+            count++;
+            temp.count = count;
+          }
+        }
+        list.push(temp);
+      }
+      return list.filter((t) => t.count > 3);
+    },
   },
 };
 </script>
