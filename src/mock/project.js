@@ -3,7 +3,7 @@ import { mock } from "mockjs";
 mock(/^\/api\/project\/?$/, 'get', {
     code: 0,
     msg: "",
-    "data|10-20": [
+    "data": [
         {
             id: "@uuid",
             name: "@ctitle(1, 10)",

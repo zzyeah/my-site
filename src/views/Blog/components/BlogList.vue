@@ -45,6 +45,7 @@
         </div>
       </li>
     </ul>
+    <empty v-if="data.rows.length === 0 && !isLoading" />
     <!-- 分页放到这里 -->
     <pager
       :current="routeInfo.page"
@@ -63,9 +64,11 @@ import fetchData from "@/mixins/fetchData.js";
 import { getBlogs } from "@/api/blog.js";
 import { formatDate } from "@/utils";
 import mainScroll from "@/mixins/mainScroll.js";
+import Empty from "../../../components/Empty/Empty.vue";
+
 export default {
-  mixins: [fetchData({}), mainScroll("mainContainer")],
-  components: { Pager },
+  mixins: [fetchData({total: 0, rows: []}), mainScroll("mainContainer")],
+  components: { Pager, Empty },
   computed: {
     // 获取路由信息
     routeInfo() {
@@ -108,7 +111,6 @@ export default {
         });
       }
     },
-    
   },
   watch: {
     $route: {
