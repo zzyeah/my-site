@@ -15,6 +15,15 @@
 </template>
 
 <script>
+// import MyComp from "./MyComp";
+// const AsyncComponent = () => {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve(MyComp);
+//     }, 3000);
+//   });
+// };
+
 import Layout from "./components/Layout/Layout.vue";
 import SiteAside from "./components/SiteAside/SiteAside.vue";
 import ToTop from "./components/ToTop/ToTop.vue";
@@ -24,6 +33,7 @@ export default {
     SiteAside,
     Layout,
     ToTop,
+    // AsyncComponent,
   },
 };
 </script>
