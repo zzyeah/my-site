@@ -1,5 +1,6 @@
 import 'nprogress/nprogress.css';
-import {start, done, configure} from "nprogress";
+import NotFound from '@/views/NotFound.vue';
+import { start, done, configure } from "nprogress";
 
 configure({
     trickleSpeed: 20,
@@ -64,5 +65,10 @@ export default [
         name: "Message", path: '/message', component: getPageComponent(() => import(/* webpackChunkName: "message" */"@/views/Message")), meta: {
             title: '留言板',
         }
+    },
+    {
+        name: "NotFound",
+        path: "*",
+        component: NotFound,
     },
 ]
