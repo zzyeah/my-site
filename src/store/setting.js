@@ -21,7 +21,6 @@ export default {
             const resp = await getSetting();
             commit('setData', resp);
             commit('setLoading', false);
-            console.log(resp.favicon);
             if (resp.favicon) {
                 let link = document.querySelector("link[rel='shortcut icon']");
                 if (link) return;

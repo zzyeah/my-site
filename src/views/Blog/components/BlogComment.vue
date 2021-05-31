@@ -26,7 +26,7 @@ export default {
     };
   },
   methods: {
-    async handleScroll(dom) {
+    handleScroll(dom) {
       if (this.isLoading || !dom) {
         // 目前正在加载更多
         return;
