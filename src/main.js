@@ -10,6 +10,7 @@ import showMessage from './utils/showMessage';
 import './api/banner';
 import './eventBus';
 import store from './store';
+store.dispatch('login/whoAmI');
 store.dispatch('setting/fetchSetting');
 Vue.prototype.$showMessage = showMessage;
 

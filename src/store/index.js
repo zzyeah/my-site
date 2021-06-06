@@ -4,6 +4,7 @@ import banner from './banner';
 import setting from './setting';
 import about from './about';
 import project from './project';
+import login from './login';
 
 if (!window.Vuex) {
     install(Vue); 
@@ -15,6 +16,7 @@ export default new Store({
         setting,
         about,
         project,
+        login,
     },
     strict: true,
 });

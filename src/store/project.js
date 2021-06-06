@@ -19,7 +19,6 @@ export default {
             if (state.data.length) return;
             commit('setLoading', true);
             const resp = await getProjects();
-            console.log(resp);
             commit('setData', resp);
             commit('setLoading', false);
         }

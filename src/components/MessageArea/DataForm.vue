@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -53,6 +54,9 @@ export default {
       isSubmiting: false,
     };
   },
+  computed: {
+    // ...mapGetters("login", ["status"]),
+  },
   methods: {
     handleSubmit() {
       this.error.nickname = this.formData.nickname ? "" : "请填写昵称";
@@ -61,6 +65,7 @@ export default {
         // 有错误
         return;
       }
+      // if(this.status === 'login'){}
       this.isSubmiting = true; // 正在提交，防止重复点击
       this.$emit("submit", this.formData, (successMsg) => {
         this.$showMessage({

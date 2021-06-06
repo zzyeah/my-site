@@ -1,9 +1,14 @@
 <template>
   <div class="site-aside-container">
-    <template v-if="data">
+    <router-link
+      v-if="data"
+      :to="{
+        name: 'Login',
+      }"
+    >
       <avatar :url="data && data.avatar" />
       <h1 class="title">{{ data.siteTitle }}</h1>
-    </template>
+    </router-link>
     <Menu />
     <contact v-if="data" />
     <p class="footer" v-if="data">{{ data.icp }}</p>
