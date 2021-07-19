@@ -1,4 +1,6 @@
 # my-site
+vue博客系统
+具备vue、vueX、vueRouter等
 
 ## Project setup
 ```
