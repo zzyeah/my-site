@@ -35,8 +35,7 @@ export default {
   background: @dark;
   padding: 20px 0;
   box-sizing: border-box;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
 }
 .avatar-container {
   margin: 0 auto;
@@ -44,6 +43,7 @@ export default {
 .footer {
   text-align: center;
   font-size: 12px;
+  color: #fff;
 }
 .title {
   font-size: 1.2em;

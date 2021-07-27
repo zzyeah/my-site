@@ -67,7 +67,7 @@ import mainScroll from "@/mixins/mainScroll.js";
 import Empty from "../../../components/Empty/Empty.vue";
 
 export default {
-  mixins: [fetchData({total: 0, rows: []}), mainScroll("mainContainer")],
+  mixins: [fetchData({ total: 0, rows: [] }), mainScroll("mainContainer")],
   components: { Pager, Empty },
   computed: {
     // 获取路由信息
