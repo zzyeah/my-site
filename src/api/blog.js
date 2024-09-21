@@ -38,10 +38,10 @@ export async function postComment(commentInfo) {
     return await request.post('/api/comment', commentInfo);
 }
 
-export async function getComments(blogid, page = 1, limit = 10) {
+export async function getComments(blogId, page = 1, limit = 10) {
     return await request.get('/api/comment', {
         params: {
-            blogid,
+            blogId,
             page,
             limit
         }

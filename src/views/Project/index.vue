@@ -1,6 +1,12 @@
  <template>
   <div class="project-container" ref="projectContainer" v-loading="loading">
-    <div v-for="item in data" :key="item.id" class="project-item">
+    <div
+      v-for="item in data"
+      :key="item.id"
+      class="project-item"
+      :ref="item.id"
+      @mousedown="mousedown($event, item)"
+    >
       <a
         :href="
           item.url ? item.url : `javascript:alert('该项目无法通过外网访问')`
@@ -40,14 +46,44 @@
 <script>
 import mainScroll from "@/mixins/mainScroll.js";
 import { mapState } from "vuex";
-import Empty from '../../components/Empty/Empty.vue';
+import Empty from "../../components/Empty/Empty.vue";
 
 export default {
+  data() {
+    return {
+      isMouseDown: false,
+      divEle: null,
+      m: new Map(),
+    };
+  },
   components: { Empty },
   mixins: [mainScroll("projectContainer")],
   computed: mapState("project", ["loading", "data"]),
   created() {
     this.$store.dispatch("project/fetchProject");
+  },
+  methods: {
+    mousedown(e, item) {
+      this.isMouseDown = true;
+      this.divEle = this.$refs[item.id][0];
+      const listener = (event) => this.handleMouseUp(event, item);
+      this.m.set("mouseUp", listener);
+      document.addEventListener("mouseup", this.m.get("mouseUp"));
+    },
+    handleMouseUp(e, item) {
+      if (this.isMouseDown) {
+        console.dir(this.divEle);
+        if (this.divEle.contains(e.target)) {
+          this.handleProjectItemClick(item.url);
+        }
+      }
+      this.isMouseDown = false;
+      document.removeEventListener("mouseup", this.m.get("mouseUp"));
+      this.m.delete("mouseUp");
+    },
+    handleProjectItemClick(url, method = "_blank") {
+      window.open(url, method);
+    },
   },
 };
 </script>
@@ -72,6 +108,7 @@ export default {
     box-shadow: -1px 1px 5px #000;
     transform: scale(1.01) translate(3px, -3px);
     color: inherit;
+    cursor: pointer;
   }
   .thumb {
     width: 250px;

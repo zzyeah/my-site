@@ -1,10 +1,12 @@
 <template>
-  <div class="about-container" v-loading="loading || !srcLoaded">
+  <div class="about-container" v-loading="!srcLoaded">
     <iframe
       class="about-content"
       :src="src"
       frameborder="0"
-      @load="srcLoaded = true"
+      @load="handleIFrame"
+      ref="iframe"
+      v-show="srcLoaded"
     ></iframe>
   </div>
 </template>
@@ -20,6 +22,18 @@ export default {
   computed: mapState("about", { src: "data", loading: "loading" }),
   created() {
     this.$store.dispatch("about/fetchAbout");
+  },
+  methods: {
+    handleIFrame(params) {
+      const success = this.isLoadSuccess(this.$refs.iframe.src);
+      if (!success) {
+        return this.$router.push("/404");
+      }
+      this.srcLoaded = true;
+    },
+    isLoadSuccess(isrc) {
+      return this.src === isrc;
+    },
   },
 };
 </script>

@@ -24,7 +24,7 @@ function delay(duration) {
 function getPageComponent(pageCompResolver) {
     return async () => {
         start()
-        if (process.env.NODE_ENV === 'development') await delay(2000);
+        // if (process.env.NODE_ENV === 'development') await delay(2000);
         const comp = await pageCompResolver();
         done();
         return comp;

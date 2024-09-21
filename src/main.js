@@ -1,5 +1,5 @@
 // 入口文件
-import './mock';
+// import './mock';
 import Vue from 'vue';
 
 // 根组件

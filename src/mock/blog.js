@@ -1,6 +1,9 @@
 import Mock from "mockjs";
 import qs from 'querystring';
 
+/**
+ * 文章分类
+ */
 Mock.mock('/api/blogtype', 'get', {
     code: 0,
     msg: '',
@@ -14,6 +17,9 @@ Mock.mock('/api/blogtype', 'get', {
     ]
 });
 
+/**
+ * 文章列表
+ */
 Mock.mock(/^\/api\/blog(\?.+)?$/, 'get', function (options) {
     const query = qs.parse(options.url);
     // console.log(query);
@@ -43,6 +49,9 @@ Mock.mock(/^\/api\/blog(\?.+)?$/, 'get', function (options) {
     });
 });
 
+/**
+ * 文章详情页
+ */
 import blog from './blog-content';
 Mock.mock(/^\/api\/blog\/[^/]+$/, 'get', blog);
 
@@ -63,6 +72,9 @@ Mock.mock('/api/comment', 'post', {
     },
 })
 
+/**
+ * 文章评论
+ */
 Mock.mock(/^\/api\/comment\/?(\?.+)?$/, 'get', function (options) {
     const query = qs.parse(options.url);
     // console.log(query);
