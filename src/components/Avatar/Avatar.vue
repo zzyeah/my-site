@@ -1,6 +1,6 @@
 <template>
   <img
-    :src="url"
+    :src="realUrl"
     alt="头像"
     class="avatar-container"
     :style="{
@@ -21,6 +21,17 @@ export default {
     size: {
       type: Number,
       default: 150, // 默认值
+    },
+  },
+  computed: {
+    realUrl() {
+      const host = process.env.VUE_APP_Server,
+        reg = /^\//;
+
+      if (reg.test(this.url)) {
+        return `${host}${this.url}`;
+      }
+      return this.url;
     },
   },
 };

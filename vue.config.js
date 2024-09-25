@@ -3,10 +3,12 @@ module.exports = {
   devServer: {
     proxy: {
       "/api": {
-        target: "http://localhost:4015",
+        target: process.env.VUE_APP_Server,
+        changeOrigin: true
       },
-      static: {
-        target: "http://localhost:4015",
+      '/static': {
+        target: process.env.VUE_APP_Server,
+        changeOrigin: true
       },
     },
   },

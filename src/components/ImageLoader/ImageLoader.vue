@@ -2,7 +2,7 @@
   <div class="image-loader-container">
     <img v-if="!allDone" :src="placeholder" class="placeholder" />
     <img
-      :src="src"
+      :src="url"
       @load="handleLoad()"
       :style="{
         opacity: opacityOrigin,
@@ -41,6 +41,10 @@ export default {
     opacityOrigin() {
       return this.originLoaded ? 1 : 0;
     },
+    url() {
+      const host = process.env.VUE_APP_Server;
+      return `${host}${this.src}`;
+    },
   },
   methods: {
     handleLoad() {
@@ -56,7 +60,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import '~@/styles/mixin.less';
+@import "~@/styles/mixin.less";
 .image-loader-container {
   position: relative;
   width: 100%;
@@ -66,7 +70,7 @@ export default {
     object-fit: cover;
     .self-fill();
   }
-  .placeholder{
+  .placeholder {
     filter: blur(2vw);
   }
 }
