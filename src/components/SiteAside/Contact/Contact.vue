@@ -32,42 +32,43 @@ export default {
     contents() {
       const resp = this.data;
       let list = [];
-      let count = 0;
       for (let data in resp) {
-        let temp = {};
+        const temp = {};
         temp.type = data;
         temp.name = resp[data];
         temp.id = Math.floor((Math.random() + 1) * 10000000);
-        if (temp.type === "github") {
-          temp.name = "zzyeah";
-          temp.href = "https://github.com/zzyeah/";
+        switch (temp.type) {
+          case "github":
+            temp.href = `https://github.com/${temp.name}/`;
+            break;
+          case "mail":
+            temp.href = `mailto:${temp.name}`;
+            break;
+          case "qq":
+            temp.href = `tencent://message/?Menu=yes&uin=${temp.name}&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45`;
+            temp.src = this.splicePath(resp["qqQrCode"]);
+            break;
+          case "weixin":
+            temp.src = this.splicePath(resp["weixinQrCode"]);
+            break;
         }
-        if (temp.type === "mail") {
-          temp.name = "541767316@qq.com";
-          temp.href = "mailto:541767316@qq.com";
-        }
-        if (temp.type === "qq") {
-          temp.name = "541767316";
-          temp.href =
-            "tencent://message/?Menu=yes&uin=541767316&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45";
-          temp.src =
-            "";
-        }
-        if (temp.type === "weixin") {
-          temp.src =
-            "";
-          temp.name = "541767316";
-        }
-        count = 0;
-        for (const i in temp) {
-          if (temp.hasOwnProperty(i)) {
-            count++;
-            temp.count = count;
-          }
-        }
+
+        const count = Object.keys(temp).length;
+        temp.count = count;
+
         list.push(temp);
       }
       return list.filter((t) => t.count > 3);
+    },
+  },
+  methods: {
+    /**
+     * 拼接路径
+     * @param src String
+     */
+    splicePath(src) {
+      if (!src) return src;
+      return `${process.env.VUE_APP_Server}${src}`;
     },
   },
 };
