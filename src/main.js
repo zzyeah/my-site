@@ -7,12 +7,14 @@ import App from './App.vue';
 import './styles/global.less';
 import router from './router';
 import showMessage from './utils/showMessage';
+import md5 from 'js-md5';
 import './api/banner';
 import './eventBus';
 import store from './store';
 store.dispatch('login/whoAmI');
 store.dispatch('setting/fetchSetting');
 Vue.prototype.$showMessage = showMessage;
+Vue.prototype.$md5 = md5;
 
 // 注册全局指令
 import vLoading from './directives/loading';

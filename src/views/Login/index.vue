@@ -10,13 +10,18 @@
           <span>密码:</span>
           <input type="password" v-model="loginPwd" />
         </div>
-        <button @click="handleClick">登录</button>
+        <div class="captcha">
+          <span>验证码:</span>
+          <input type="text" v-model="captchaVal" />
+          <div v-html="data" v-show="data"></div>
+        </div>
+        <button @click="login">登录</button>
         {{ msg }}
       </div>
       <div v-if="status === 'login'">
         <span>用户信息</span>
         <div v-for="u in userInfo" :key="u">{{ u }}</div>
-        <button @click="handleLogout">Logout</button>
+        <button @click="logout">Logout</button>
       </div>
     </div>
   </div>
@@ -24,29 +29,45 @@
 
 <script>
 import { mapGetters, mapState } from "vuex";
+import fetchData from "@/mixins/fetchData.js";
+import * as userApi from "@/api/login";
 export default {
+  mixins: [fetchData()],
   data() {
     return {
       loginId: null,
       loginPwd: null,
+      captchaVal: null,
+      remember: false,
     };
   },
   computed: {
-    ...mapGetters("login", ["status"]),
+    ...mapGetters("login", ["status", "captcha"]),
     ...mapState("login", ["userInfo", "msg"]),
   },
   methods: {
-    handleClick() {
+    async fetchData() {
+      const result =  await userApi.captcha();
+      return result
+    },
+    login() {
       this.$store
         .dispatch("login/login", {
           loginId: this.loginId,
           loginPwd: this.loginPwd,
+          captcha: this.captchaVal,
+          remember: this.remember,
         })
-        .then(() => {
-          this.$router.push({ name: "Home" });
+        .then((resp) => {
+          console.log('resp');
+          console.log(resp);
+          
+          if (resp) {
+            this.$router.push({ name: "Home" });
+          }
         });
     },
-    handleLogout() {
+    logout() {
       this.$store.dispatch("login/logout");
     },
   },

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start": "npm run serve",
     "serve": "vue-cli-service serve --mode development",
     "build": "vue-cli-service build --mode production",
     "build-m": "vue-cli-service build --modern",
@@ -19,9 +20,11 @@
     "test:RightList": "vue serve ./src/views/Blog/components/RightList-test.vue"
   },
   "dependencies": {
+    "ant-design-vue": "^4.2.5",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "highlight.js": "^10.7.2",
+    "js-md5": "^0.8.3",
     "mockjs": "^1.1.0",
     "nprogress": "^0.2.0",
     "querystring": "^0.2.1",
